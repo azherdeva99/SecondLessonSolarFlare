@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private int coreFrequency = 3; // скорость компьютера в секунду
 
     private TextView output; // окно вывода на экран смартфона решения задачи
+    private int[] solarFlareTime = {60, 70, 85};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     // МОДУЛЬ 2
     // метод определения времени обработки компьютером данных с одной планеты в секундах (скорость компьютера, размер данных)
-    private int volumeTime(int coreFrequency, int volumeData) {
-        return volumeData / coreFrequency;
+    private int volumeTime(int coreFrequency, int volumeData, int solarFlareTime) {
+        return volumeData * solarFlareTime / 60 / coreFrequency;
     }
 
     // МОДУЛЬ 3 (использующий МОДУЛИ 1-2)
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         int[] volume = new int[volumeData.length]; // создание пустого массива для времени обработки компьютером данных от спутника (в секундах)
         for (int i = 0; i < volume.length; i++) { // инициализация данного массива
-            volume[i] = volumeTime(frequency, volumeData[i]); // определение времени обработки компьютером данных от одного спутника
+            volume[i] = volumeTime(frequency, volumeData[i], solarFlareTime[i]); // определение времени обработки компьютером данных от одного спутника
         }
 
         int count = 0; // счётчик времени работы ядра компьютера
